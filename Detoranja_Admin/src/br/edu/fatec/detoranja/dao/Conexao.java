@@ -4,15 +4,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Conexao {
+	
+	final private static String server = "sql10.freemysqlhosting.net";
+	final private static String usuario = "sql10414616";
+	final private static String senha = "S1i69LIPgR";
+	final private static String banco = "sql10414616";
+	final private static String porta = "3306";
 
 	public static Connection getConnection() {
 		try {
-			String server = "sql10.freemysqlhosting.net";
-			String usuario = "sql10414616";
-			String senha = "S1i69LIPgR";
-			String banco = "sql10414616";
-			Class.forName("com.mysql.jdbc.Driver");
-			String path = "jdbc:mysql//" + server + "/" + banco;
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			String path = "jdbc:mysql://" + server + ":" + porta + "/" + banco;
 
 			Connection conn = DriverManager.getConnection(path, usuario, senha);
 			return conn;	

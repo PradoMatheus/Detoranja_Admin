@@ -25,7 +25,6 @@ public class AdministradorVh implements IViewHelper {
 		} else if (operacao != null && operacao.equals("Buscar")) {
 			
 			Connection conn = null;
-			conn = Conexao.getConnection();
 			
 			try {
 				String sql = "SELECT * FROM `sql10414616`.`BD_ADMINISTRADOR`;";
@@ -34,7 +33,7 @@ public class AdministradorVh implements IViewHelper {
 				ResultSet rs = pstm.executeQuery();
 				while (rs.next()) {
 
-					System.out.println(rs.getInt("nome"));
+					System.out.println(rs.getString("nome"));
 
 				}
 			} catch (Exception e) {

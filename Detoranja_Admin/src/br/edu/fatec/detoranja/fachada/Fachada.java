@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.edu.fatec.detoranja.dao.AdministradorDAO;
 import br.edu.fatec.detoranja.dao.IDAO;
+import br.edu.fatec.detoranja.dominio.Administrador;
 import br.edu.fatec.detoranja.dominio.IDominio;
 import br.edu.fatec.detoranja.strategy.IStrategy;
 import br.edu.fatec.detoranja.util.Resultado;
@@ -22,6 +24,10 @@ public class Fachada implements IFachada {
 		daos = new HashMap<String, IDAO>();
 		rns = new HashMap<String, Map<String, List<IStrategy>>>();
 		resultado = new Resultado();
+		
+		AdministradorDAO admDao = new AdministradorDAO();
+
+		daos.put(Administrador.class.getName(), admDao);
 
 		// --------Regra de Negocio
 		
@@ -43,15 +49,15 @@ public class Fachada implements IFachada {
 		IDAO idao = daos.get(dominio.getClass().getName());
 		executarStrategys(dominio, rns.get(dominio.getClass().getName()).get("Salvar"));
 		if (resultado.getMsg() == null) {
-			idao.cadastrar(dominio);
+			idao.salvar(dominio);
 		}
-		resultado.setListDominio(idao.listar());
+		resultado.setListDominio(idao.buscarlistar());
 		return resultado;
 	}
 
 	public Resultado buscar(IDominio dominio) {
 		IDAO idao = daos.get(dominio.getClass().getName());
-		resultado.setListDominio(idao.listar());
+		resultado.setListDominio(idao.buscarlistar());
 
 		if (((Integer) dominio.getId()) != null) {
 			resultado.setDominio(idao.buscar(dominio));

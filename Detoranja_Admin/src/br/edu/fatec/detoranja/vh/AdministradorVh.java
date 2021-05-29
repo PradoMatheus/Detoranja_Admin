@@ -1,13 +1,12 @@
 package br.edu.fatec.detoranja.vh;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.edu.fatec.detoranja.dao.Conexao;
 import br.edu.fatec.detoranja.dominio.Administrador;
 import br.edu.fatec.detoranja.dominio.IDominio;
 import br.edu.fatec.detoranja.util.Resultado;
@@ -24,24 +23,24 @@ public class AdministradorVh implements IViewHelper {
 
 		} else if (operacao != null && operacao.equals("Buscar")) {
 			
-			Connection conn = null;
+			String email = req.getParameter("txtemail");
+			String senha = req.getParameter("txtpassword");
 			
 			try {
-				String sql = "SELECT * FROM `sql10414616`.`BD_ADMINISTRADOR`;";
-				conn = Conexao.getConnection();
-				PreparedStatement pstm = conn.prepareStatement(sql);
-				ResultSet rs = pstm.executeQuery();
-				while (rs.next()) {
-
-					System.out.println(rs.getString("nome"));
-
-				}
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			} finally {
-				Conexao.fechar(conn);
+				
+				MessageDigest algorithm = MessageDigest.getInstance("MD5");
+				byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+				
+				adm.setSenha(messageDigest.toString());
+						
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
 			}
 			
+			adm.setEmail(email);
+
 		}
 
 		return adm;
@@ -50,7 +49,11 @@ public class AdministradorVh implements IViewHelper {
 	@Override
 	public void setDominio(HttpServletRequest req, HttpServletResponse resp, Resultado resultado) {
 		String operacao = req.getParameter("operacao");
+		
 		if (operacao != null && operacao.equals("Salvar")) {
-		} 
+			
+		} else if (operacao != null && operacao.equals("Buscar")) {
+			
+		}
 	}
 }

@@ -1,5 +1,5 @@
 <head>
-    <title>Detoranja</title>
+    <title>Administrador Detoranja</title>
     <meta charset="UTF-8">
     <link href="./Bootstrap/css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
 </head>
@@ -12,10 +12,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Login</h5>
                     <div class="form-group" >
-                        <input type="text" class="form-control" id="text_usuario" placeholder="Usuario">
+                        <input type="text" class="form-control" id="txtemail" name="txtemail" placeholder="E-mail">
                     </div>
                     <div class="form-group" >
-                        <input type="password" class="form-control" id="password" placeholder="Senha">
+                        <input type="password" class="form-control" id="txtpassword" name="txtpassword" placeholder="Senha">
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="operacao" value="Buscar">Login</button>
                     </div>

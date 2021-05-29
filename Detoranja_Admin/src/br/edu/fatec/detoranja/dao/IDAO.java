@@ -6,10 +6,9 @@ import br.edu.fatec.detoranja.dominio.IDominio;
 
 public interface IDAO {
 	
-	public boolean cadastrar(IDominio obj);
-	public boolean remover(IDominio obj);
-	public boolean alterar(IDominio obj);
+	public boolean salvar(IDominio obj);
+	public boolean excluir(IDominio obj);
 	public IDominio buscar(IDominio obj);
-	public List<IDominio> listar();
+	public List<IDominio> buscarlistar();
 	
 }

@@ -24,19 +24,18 @@ public class Fachada implements IFachada {
 		daos = new HashMap<String, IDAO>();
 		rns = new HashMap<String, Map<String, List<IStrategy>>>();
 		resultado = new Resultado();
-		
+
 		AdministradorDAO admDao = new AdministradorDAO();
 
 		daos.put(Administrador.class.getName(), admDao);
 
 		// --------Regra de Negocio
-		
+
 		// -- Regra para salvar funcionario
 		List<IStrategy> salvarfun = new ArrayList<IStrategy>();
 		// -- Regra para editar funcionario
 		List<IStrategy> editarfun = new ArrayList<IStrategy>();
-		
-		
+
 		// Contem todas as regras de negocio de funcionario
 		Map<String, List<IStrategy>> rnfuncionario = new HashMap<String, List<IStrategy>>();
 
@@ -57,11 +56,9 @@ public class Fachada implements IFachada {
 
 	public Resultado buscar(IDominio dominio) {
 		IDAO idao = daos.get(dominio.getClass().getName());
-		resultado.setListDominio(idao.buscarlistar());
 
-		if (((Integer) dominio.getId()) != null) {
-			resultado.setDominio(idao.buscar(dominio));
-		}
+		resultado.setDominio(idao.buscar(dominio));
+		
 		return resultado;
 	}
 

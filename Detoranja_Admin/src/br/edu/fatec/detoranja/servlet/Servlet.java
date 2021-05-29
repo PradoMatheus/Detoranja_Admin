@@ -34,7 +34,6 @@ public class Servlet extends HttpServlet {
        
 	private void executar(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		IViewHelper iViewHelper = mapavh.get(req.getRequestURI());
-		System.out.println(req.getRequestURI());
 		IDominio dominio = iViewHelper.getDominio(req);
 		String operacao = req.getParameter("operacao");
 		ICommand command = commands.get(operacao);

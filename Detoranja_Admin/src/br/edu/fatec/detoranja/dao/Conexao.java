@@ -4,22 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Conexao {
-	
-	final private static String server = "sql10.freemysqlhosting.net";
-	final private static String usuario = "sql10414616";
-	final private static String senha = "S1i69LIPgR";
-	final private static String banco = "sql10414616";
-	final private static String porta = "3306";
 
 	public static Connection getConnection() {
 		try {
-			
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			
-			String path = "jdbc:mysql://" + server + ":" + porta + "/" + banco;
+			String server = "localhost";
+			String usuario = "postgres";
+			String senha = "123456";
+			String banco = "Detoranja";
+			Class.forName("org.postgresql.Driver");
+			String path = "jdbc:postgresql://" + server + "/" + banco;
 
 			Connection conn = DriverManager.getConnection(path, usuario, senha);
-			return conn;	
+			return conn;
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());

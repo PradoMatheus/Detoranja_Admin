@@ -1,7 +1,11 @@
 package br.edu.fatec.detoranja.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
+import br.edu.fatec.detoranja.dominio.Administrador;
 import br.edu.fatec.detoranja.dominio.IDominio;
 
 public class AdministradorDAO implements IDAO{
@@ -20,7 +24,26 @@ public class AdministradorDAO implements IDAO{
 
 	@Override
 	public IDominio buscar(IDominio obj) {
-		// TODO Auto-generated method stub
+		Connection conn = null;
+		Administrador admin = (Administrador) obj;
+
+		try {
+			String sql = "SELECT * FROM \"BD_ADMINISTRADOR\" WHERE senha = '" + admin.getSenha()  + "' AND email = '" + admin.getEmail()  + "';";
+			conn = Conexao.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+
+				admin.setId(rs.getInt("id"));
+				admin.setNome(rs.getString("nome"));
+				
+			}
+			return admin;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			Conexao.fechar(conn);
+		}
 		return null;
 	}
 

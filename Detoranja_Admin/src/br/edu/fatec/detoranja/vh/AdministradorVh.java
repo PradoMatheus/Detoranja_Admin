@@ -1,14 +1,14 @@
 package br.edu.fatec.detoranja.vh;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.io.IOException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.fatec.detoranja.dominio.Administrador;
 import br.edu.fatec.detoranja.dominio.IDominio;
+import br.edu.fatec.detoranja.util.Criptografia_Hash;
 import br.edu.fatec.detoranja.util.Resultado;
 
 public class AdministradorVh implements IViewHelper {
@@ -22,23 +22,11 @@ public class AdministradorVh implements IViewHelper {
 		if (operacao != null && operacao.equals("Salvar")) {
 
 		} else if (operacao != null && operacao.equals("Buscar")) {
-			
+
 			String email = req.getParameter("txtemail");
 			String senha = req.getParameter("txtpassword");
-			
-			try {
-				
-				MessageDigest algorithm = MessageDigest.getInstance("MD5");
-				byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
-				
-				adm.setSenha(messageDigest.toString());
-						
-			} catch (NoSuchAlgorithmException e) {
-				e.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			
+
+			adm.setSenha(Criptografia_Hash.criptografiaHash(senha));
 			adm.setEmail(email);
 
 		}
@@ -49,11 +37,23 @@ public class AdministradorVh implements IViewHelper {
 	@Override
 	public void setDominio(HttpServletRequest req, HttpServletResponse resp, Resultado resultado) {
 		String operacao = req.getParameter("operacao");
-		
+
 		if (operacao != null && operacao.equals("Salvar")) {
-			
+
 		} else if (operacao != null && operacao.equals("Buscar")) {
-			
+			Administrador admin = (Administrador) resultado.getDominio();
+			try {
+				if (admin.getId() != 0) {
+					req.getSession().setAttribute("AdminUser", admin.getId());
+					req.getRequestDispatcher("principal.html").forward(req, resp);
+				} else {
+					req.getRequestDispatcher("index.jsp").forward(req, resp);
+				}
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

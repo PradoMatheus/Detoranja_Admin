@@ -45,7 +45,7 @@ public class AdministradorVh implements IViewHelper {
 			try {
 				if (admin.getId() != 0) {
 					req.getSession().setAttribute("AdminUser", admin.getId());
-					req.getRequestDispatcher("principal.html").forward(req, resp);
+					req.getRequestDispatcher("principal.jsp").forward(req, resp);
 				} else {
 					req.getRequestDispatcher("index.jsp").forward(req, resp);
 				}

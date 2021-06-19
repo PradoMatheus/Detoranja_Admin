@@ -48,7 +48,7 @@ public class AdministradorDAO implements IDAO{
 	}
 
 	@Override
-	public List<IDominio> buscarlistar() {
+	public List<IDominio> lista(IDominio obj) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -9,6 +9,6 @@ public interface IDAO {
 	public boolean salvar(IDominio obj);
 	public boolean excluir(IDominio obj);
 	public IDominio buscar(IDominio obj);
-	public List<IDominio> buscarlistar();
+	public List<IDominio> lista(IDominio obj);
 	
 }

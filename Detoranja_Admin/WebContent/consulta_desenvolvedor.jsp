@@ -1,3 +1,4 @@
+<%@page import="br.edu.fatec.detoranja.dominio.Produto_Desenvolvedor"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
@@ -17,11 +18,11 @@
 
 	<%@ include file="complements/navbar.jsp"%>
 	
-	<% List<Produto> listaProduto = (List<Produto>) request.getAttribute("listaProduto"); %>
+	<% List<Produto_Desenvolvedor> listaProduto_Desenvolvedor = (List<Produto_Desenvolvedor>) request.getAttribute("listaProduto_Desenvolvedor"); %>
 
 	<div class="container">
 		<div class="py-5 text-center">
-			<h2>Lista de Produtos</h2>
+			<h2>Lista de Desenvolvedores</h2>
 		</div>
 		<table class="table table-bordered">
 			<thead>
@@ -29,18 +30,18 @@
 					<th scope="col">ID</th>
 					<th scope="col">Descrição</th>
 					<th scope="col">Editar</th>
+					<th scope="col">Excluir</th>
 				</tr>
 			</thead>
 			<tbody>
 			<%
-				if(listaProduto != null){
-					for (Produto produto : listaProduto){
+				if(listaProduto_Desenvolvedor != null){
+					for (Produto_Desenvolvedor produto_desenvolvedor : listaProduto_Desenvolvedor){
 						out.print("<tr>");
-						out.print("<th scope='row'>" + produto.getId() + "</th>");
-						out.print("<td>" + produto.getNome() + "</td>");
-						out.print("<td>R$" + String.format(Locale.GERMAN, "%,.2f", produto.getValor()) + "</td>");
-						out.print("<td>" + produto.getData_alteracao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "</td>");
+						out.print("<th scope='row'>" + produto_desenvolvedor.getId() + "</th>");
+						out.print("<td>" + produto_desenvolvedor.getDescricao() + "</td>");
 						out.print("<td><button type='button' class='btn btn-outline-danger'>Editar</button></td>");
+						out.print("<td><button type='button' class='btn btn-outline-danger'>Excluir</button></td>");
 						out.print("</tr>");
 					}
 				} else{

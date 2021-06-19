@@ -23,11 +23,8 @@ public class AdministradorVh implements IViewHelper {
 
 		} else if (operacao != null && operacao.equals("Buscar")) {
 
-			String email = req.getParameter("txtemail");
-			String senha = req.getParameter("txtpassword");
-
-			adm.setSenha(Criptografia_Hash.criptografiaHash(senha));
-			adm.setEmail(email);
+			adm.setSenha(Criptografia_Hash.criptografiaHash(req.getParameter("txtpassword")));
+			adm.setEmail(req.getParameter("txtemail"));
 
 		}
 

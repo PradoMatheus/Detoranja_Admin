@@ -5,6 +5,7 @@
 		
 		<!-- CSS -->
 		<link rel="stylesheet" href="./Bootstrap/css/bootstrap.min.css">
+		<link rel="icon" href="./complements/logo_browser.png">
 	
 	</head>
 	<%@ include file="complements/navbar.jsp"%>

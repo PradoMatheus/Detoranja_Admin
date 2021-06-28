@@ -1,3 +1,4 @@
+<%@page import="br.edu.fatec.detoranja.dominio.Produto_Distribuidor"%>
 <%@page import="br.edu.fatec.detoranja.dominio.Produto_Desenvolvedor"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -25,28 +26,28 @@
 	<%@ include file="complements/navbar.jsp"%>
 
 	<%
-	List<Produto_Desenvolvedor> listaProduto_Desenvolvedor = (List<Produto_Desenvolvedor>) request
-			.getAttribute("listaProduto_Desenvolvedor");
+	List<Produto_Distribuidor> listaProduto_Distribuidor = (List<Produto_Distribuidor>) request
+			.getAttribute("listaProduto_Distribuidor");
 	%>
 
 	<div class="container" style="height: 85%">
 		<div class="py-5 text-center">
-			<h2>Lista de Desenvolvedores</h2>
+			<h2>Lista de Distribuidores</h2>
 		</div>
 		<div class="form-row" style="position: relative;">
 		  <div class="form-group col-md-3">
-		  		<button class="btn btn-primary novoDesenvolvedor" type="submit"><img src="./icons/add.svg" height="20px" style="margin-right: 5px">Adicionar Desenvolvedor</button>
+		  		<button class="btn btn-primary novoDistribuidor" type="submit"><img src="./icons/add.svg" height="20px" style="margin-right: 5px">Adicionar Distribuidor</button>
 		  </div>
 		  <div class="form-group col-md-9" style="align-items: center">
 	  		<div class="input-group">
-				<input type="text" class="form-control filtroDesenvolvedor" aria-describedby="pesquisar" placeholder="Pesquisar" id="txtPesquisa" name="txtPesquisa">
+				<input type="text" class="form-control filtroDistribuidor" aria-describedby="pesquisar" placeholder="Pesquisar" id="txtPesquisa" name="txtPesquisa">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="txtPesquisa"><img src="./icons/search.svg" height="20px"></span>
 				</div>
 			</div>
 		  </div>
 		</div>
-		<table class="table table-bordered table-sm" id="tabela_desenvolvedor">
+		<table class="table table-bordered table-sm" id="tabela_distribuidor">
 			<thead>
 				<tr>
 					<th class="colDev" style="width: 5%" scope="col">ID</th>
@@ -56,18 +57,18 @@
 			</thead>
 			<tbody>
 				<%
-				if (listaProduto_Desenvolvedor != null) {
-					for (Produto_Desenvolvedor produto_desenvolvedor : listaProduto_Desenvolvedor) {
-						out.print("<tr id='linha_desenvolvedor_" + produto_desenvolvedor.getId() + "'>");
-						out.print("<th class='colDev' style='width: 5%' scope='row'>" + produto_desenvolvedor.getId() + "</th>");
-						out.print("<td style='width: 85%' id='desenvolvedor_" + produto_desenvolvedor.getId() + "'>" + produto_desenvolvedor.getDescricao() + "</td>");
-						out.print("<td class='colDev' style='width: 10%'><button type='button' class='btn btn-outline-danger editarDesenvolvedor' value='"
-						+ produto_desenvolvedor.getId() + "'>Editar</button></td>");
+				if (listaProduto_Distribuidor != null) {
+					for (Produto_Distribuidor produto_distribuidor : listaProduto_Distribuidor) {
+						out.print("<tr id='linha_distribuidor_" + produto_distribuidor.getId() + "'>");
+						out.print("<th class='colDev' style='width: 5%' scope='row'>" + produto_distribuidor.getId() + "</th>");
+						out.print("<td style='width: 85%' id='distribuidor_" + produto_distribuidor.getId() + "'>" + produto_distribuidor.getDescricao() + "</td>");
+						out.print("<td class='colDev' style='width: 10%'><button type='button' class='btn btn-outline-danger editarDistribuidor' value='"
+						+ produto_distribuidor.getId() + "'>Editar</button></td>");
 						out.print("</tr>");
 					}
 				} else {
 					out.print("<tr>");
-					out.print("<td style='text-align: center' colspan='5'>Sem Produtos Cadastrados!</td>");
+					out.print("<td style='text-align: center' colspan='5'>Sem Distribuidores Cadastrados!</td>");
 					out.print("</tr>");
 				}
 				%>
@@ -87,21 +88,21 @@
 	</div>
 	
 	<!-- Modal de Edição e cadatro de um Desenvolvedor-->
-	<div class="modal fade" id="modalDesenvolvedor" role="dialog"
+	<div class="modal fade" id="modalDistribuidor" role="dialog"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<form action="produto_desenvolvedor" method="post">
+				<form action="produto_distribuidor" method="post">
 				<div class="modal-header">
-					<h5 class="modal-title" id="labelDesenvolvedor">Novo
+					<h5 class="modal-title" id="labelDistribuidor">Novo
 						Desenvolvedor</h5>
 				</div>
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="txtId" class="col-form-label">ID</label>
 							<input type="text" class="form-control col-md-4" id="txtId" name="txtId" readonly>
-							<label for="txtDesenvolvedor" class="col-form-label">Desenvolvedor</label>
-							<input type="text" class="form-control" id="txtDesenvolvedor" name="txtDesenvolvedor"
+							<label for="txtDistribuidor" class="col-form-label">Distribuidor</label>
+							<input type="text" class="form-control" id="txtDistribuidor" name="txtDistribuidor"
 								required="required">
 						</div>
 					</div>
@@ -124,40 +125,40 @@
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-					$(".editarDesenvolvedor").click(function() {
-						$('#labelDesenvolvedor').html('Editar Desenvolvedor')
+					$(".editarDistribuidor").click(function() {
+						$('#labelDistribuidor').html('Editar Distribuidor')
 						$("#btnExcluir").attr("disabled", false);
-						$("#txtDesenvolvedor").val($("#desenvolvedor_" + $(this).val()).text());
+						$("#txtDistribuidor").val($("#distribuidor_" + $(this).val()).text());
 						$("#txtId").val($(this).val())
 						$("#btnSalvar").html('Atualizar')
-						$('#modalDesenvolvedor').modal('show')
+						$('#modalDistribuidor').modal('show')
 					});
-					$(".novoDesenvolvedor").click(function() {
-						$('#labelDesenvolvedor').html('Novo Desenvolvedor')
+					$(".novoDistribuidor").click(function() {
+						$('#labelDistribuidor').html('Novo Distribuidor')
 						$("#btnExcluir").attr("disabled", true);
 						$("#txtId").val(0)
 						$("#btnSalvar").html('Salvar')
-						$("#txtDesenvolvedor").val('');
-						$('#modalDesenvolvedor').modal('show')
+						$("#txtDistribuidor").val('');
+						$('#modalDistribuidor').modal('show')
 					});
-					$(".filtroDesenvolvedor").keyup(function(){
+					$(".filtroDistribuidor").keyup(function(){
 						// Busca o valor digitado pelo usuario no input
 						var filtro_digitado = $(this).val().toUpperCase();
 						
 						// Recupera a tabela de deseja filtrar
-						var tabela = document.getElementById("tabela_desenvolvedor");
+						var tabela = document.getElementById("tabela_distribuidor");
 						// Percorre todas as colunas da tabela
 						for (var i = 1, row; row = tabela.rows[i]; i++) {
-							// Recupera o id do fornecedor que esta identificado na linha <td> e filtra apenas para exibir o numero
-							var id_desenvolvedor = row.id.split("").filter(n => (Number(n) || n == 0)).join("")
+							// Recupera o id do distribuidor que esta identificado na linha <td> e filtra apenas para exibir o numero
+							var id_distribuidor = row.id.split("").filter(n => (Number(n) || n == 0)).join("")
 							// Recupera a descricão da celula
-							var descricao = $("#desenvolvedor_" + id_desenvolvedor).text().toUpperCase()
+							var descricao = $("#distribuidor_" + id_distribuidor).text().toUpperCase()
 							
 							// Compara os textos e caso exista, é exibida na View 
 							if(descricao.includes(filtro_digitado, 0)){		
-								$("#linha_desenvolvedor_" + id_desenvolvedor).show();
+								$("#linha_distribuidor_" + id_distribuidor).show();
 							} else {
-								$("#linha_desenvolvedor_" + id_desenvolvedor).hide();
+								$("#linha_distribuidor_" + id_distribuidor).hide();
 							}
 						}
 					});

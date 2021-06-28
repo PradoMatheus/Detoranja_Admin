@@ -11,12 +11,14 @@ import br.edu.fatec.detoranja.dao.ProdutoDAO;
 import br.edu.fatec.detoranja.dao.Produto_CategoriaDAO;
 import br.edu.fatec.detoranja.dao.Produto_DesenvolvedorDAO;
 import br.edu.fatec.detoranja.dao.Produto_DistribuidorDAO;
+import br.edu.fatec.detoranja.dao.Produto_PlataformaDao;
 import br.edu.fatec.detoranja.dominio.Administrador;
 import br.edu.fatec.detoranja.dominio.IDominio;
 import br.edu.fatec.detoranja.dominio.Produto;
 import br.edu.fatec.detoranja.dominio.Produto_Categoria;
 import br.edu.fatec.detoranja.dominio.Produto_Desenvolvedor;
 import br.edu.fatec.detoranja.dominio.Produto_Distribuidor;
+import br.edu.fatec.detoranja.dominio.Produto_Plataforma;
 import br.edu.fatec.detoranja.strategy.IStrategy;
 import br.edu.fatec.detoranja.util.Resultado;
 
@@ -38,6 +40,7 @@ public class Fachada implements IFachada {
 		Produto_CategoriaDAO produto_categoriaDAO = new Produto_CategoriaDAO();
 		Produto_DesenvolvedorDAO produto_desenvolvedorDAO = new Produto_DesenvolvedorDAO();
 		Produto_DistribuidorDAO produto_distribuidorDAO = new Produto_DistribuidorDAO();
+		Produto_PlataformaDao produto_plataformaDAO = new Produto_PlataformaDao(); 
 
 		// VINCULANDO AS DAOS AS SUAS CLASSES
 		daos.put(Administrador.class.getName(), admDao);
@@ -45,6 +48,7 @@ public class Fachada implements IFachada {
 		daos.put(Produto_Categoria.class.getName(), produto_categoriaDAO);
 		daos.put(Produto_Desenvolvedor.class.getName(), produto_desenvolvedorDAO);
 		daos.put(Produto_Distribuidor.class.getName(), produto_distribuidorDAO);
+		daos.put(Produto_Plataforma.class.getName(), produto_plataformaDAO);
 
 		// --------Regra de Negocio
 
@@ -63,11 +67,11 @@ public class Fachada implements IFachada {
 	@Override
 	public Resultado salvar(IDominio dominio) {
 		IDAO idao = daos.get(dominio.getClass().getName());
-		// executarStrategys(dominio,
-		// rns.get(dominio.getClass().getName()).get("Salvar"));
+
 		if (resultado.getMsg() == null) {
 			idao.salvar(dominio);
 		}
+
 		return resultado;
 	}
 
@@ -75,6 +79,17 @@ public class Fachada implements IFachada {
 		IDAO idao = daos.get(dominio.getClass().getName());
 
 		resultado.setDominio(idao.buscar(dominio));
+
+		return resultado;
+	}
+
+	@Override
+	public Resultado excluir(IDominio dominio) {
+		IDAO idao = daos.get(dominio.getClass().getName());
+
+		if (resultado.getMsg() == null) {
+			idao.excluir(dominio);
+		}
 
 		return resultado;
 	}
@@ -99,4 +114,5 @@ public class Fachada implements IFachada {
 		}
 		return;
 	}
+
 }

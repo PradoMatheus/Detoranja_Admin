@@ -49,7 +49,7 @@ public class ProdutoVh implements IViewHelper {
 
 		if (operacao != null && operacao.equals("Salvar")) {
 			try {
-				req.getRequestDispatcher("./produto?operacao=Lista").forward(req, resp);
+				req.getRequestDispatcher("/produto?operacao=Lista").forward(req, resp);
 			} catch (ServletException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

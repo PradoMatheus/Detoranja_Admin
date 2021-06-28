@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-secondary navbar-expand-lg">
+<nav class="navbar navbar-dark bg-secondary fixed-top navbar-expand-lg">
 
 	<%
 		// VALIDA SE O USUARIO ESTÁ LOGADO, CASO NÃO ESTEJA É DIRECIONA A TELA DE LOGIN
@@ -29,9 +29,9 @@
 					<a class="dropdown-item" href="./produto?operacao=Lista">Produtos</a> 
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="./produto_desenvolvedor?operacao=Lista&tipo=object">Desenvolvedores</a>
-					<a class="dropdown-item" href="#">Distribuidoras</a>
-					<a class="dropdown-item" href="#">Categorias</a>
-					<a class="dropdown-item" href="#">Plataformas</a>
+					<a class="dropdown-item" href="./produto_distribuidor?operacao=Lista&tipo=object">Distribuidoras</a>
+					<a class="dropdown-item" href="./produto_categoria?operacao=Lista&tipo=object">Categorias</a>
+					<a class="dropdown-item" href="./produto_plataforma?operacao=Lista&tipo=object">Plataformas</a>
 				</div>
 			</li>
 			<li class="nav-item">
@@ -74,7 +74,7 @@
 				  <div class="modal-dialog modal-dialog-centered" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title" >Sair</h5>
+				        <h5 class="modal-title" >Logout</h5>
 				      </div>
 				      <div class="modal-body">
 				        Deseja realmente sair do Administrador Detoranja ?
@@ -91,3 +91,5 @@
 	</div>
 	
 </nav>
+
+<br><br>

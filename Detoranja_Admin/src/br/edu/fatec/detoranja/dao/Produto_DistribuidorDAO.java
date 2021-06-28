@@ -13,13 +13,53 @@ public class Produto_DistribuidorDAO implements IDAO {
 
 	@Override
 	public boolean salvar(IDominio obj) {
-		// TODO Auto-generated method stub
+		Produto_Distribuidor produto_distribuidor = (Produto_Distribuidor) obj;
+
+		Connection conn = null;
+		String sql = null;
+		
+		if(produto_distribuidor.getId() < 1)
+			sql = "INSERT INTO \"BD_PRODUTOS_DISTRIBUIDOR\" (descricao) VALUES (?);";
+		else
+			sql = "UPDATE \"BD_PRODUTOS_DISTRIBUIDOR\" SET descricao = ? WHERE id = " + produto_distribuidor.getId() + ";";
+			
+		try {
+			conn = Conexao.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, produto_distribuidor.getDescricao());
+			
+			pstm.execute();
+
+			return true;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			Conexao.fechar(conn);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean excluir(IDominio obj) {
-		// TODO Auto-generated method stub
+		Produto_Distribuidor produto_distribuidor = (Produto_Distribuidor) obj;
+
+		Connection conn = null;
+		String sql = "DELETE FROM \"BD_PRODUTOS_DISTRIBUIDOR\" WHERE id = ?;";
+
+			
+		try {
+			conn = Conexao.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, produto_distribuidor.getId());
+			
+			pstm.execute();
+
+			return true;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			Conexao.fechar(conn);
+		}
 		return false;
 	}
 
@@ -35,7 +75,7 @@ public class Produto_DistribuidorDAO implements IDAO {
 
 		Connection conn = null;
 
-		String sql = "SELECT * FROM \"BD_PRODUTOS_DISTRIBUIDOR\" ORDER BY descricao;";
+		String sql = "SELECT * FROM \"BD_PRODUTOS_DISTRIBUIDOR\" ORDER BY id;";
 
 		try {
 			conn = Conexao.getConnection();

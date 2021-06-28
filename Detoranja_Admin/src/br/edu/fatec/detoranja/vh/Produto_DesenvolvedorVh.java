@@ -23,7 +23,16 @@ public class Produto_DesenvolvedorVh implements IViewHelper {
 		Produto_Desenvolvedor produto_desenvolvedor = new Produto_Desenvolvedor();
 
 		if (operacao != null && operacao.equals("Salvar")) {
+			
+			produto_desenvolvedor.setDescricao(req.getParameter("txtDesenvolvedor"));
+			produto_desenvolvedor.setId(Integer.parseInt(req.getParameter("txtId").toString()));
+			
 
+		} else if (operacao != null && operacao.equals("Excluir")) {
+			
+			produto_desenvolvedor.setDescricao(req.getParameter("txtDesenvolvedor"));
+			produto_desenvolvedor.setId(Integer.parseInt(req.getParameter("txtId").toString()));
+		
 		} else if (operacao != null && operacao.equals("Lista")) {
 
 		}
@@ -36,7 +45,25 @@ public class Produto_DesenvolvedorVh implements IViewHelper {
 		String operacao = req.getParameter("operacao");
 
 		if (operacao != null && operacao.equals("Salvar")) {
+			
+			try {
+				req.getRequestDispatcher("/produto_desenvolvedor?operacao=Lista&tipo=object").forward(req, resp);
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
+		} else if (operacao != null && operacao.equals("Excluir")) {
+			
+			try {
+				req.getRequestDispatcher("/produto_desenvolvedor?operacao=Lista&tipo=object").forward(req, resp);
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 		} else if (operacao != null && operacao.equals("Lista")) {
 
 			if (req.getParameter("tipo").equals("json")) {

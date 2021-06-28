@@ -13,13 +13,53 @@ public class Produto_CategoriaDAO implements IDAO {
 
 	@Override
 	public boolean salvar(IDominio obj) {
-		// TODO Auto-generated method stub
+		Produto_Categoria produto_categoria = (Produto_Categoria) obj;
+
+		Connection conn = null;
+		String sql = null;
+		
+		if(produto_categoria.getId() < 1)
+			sql = "INSERT INTO \"BD_CATEGORIAS\" (descricao) VALUES (?);";
+		else
+			sql = "UPDATE \"BD_CATEGORIAS\" SET descricao = ? WHERE id = " + produto_categoria.getId() + ";";
+			
+		try {
+			conn = Conexao.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, produto_categoria.getDescricao());
+			
+			pstm.execute();
+
+			return true;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			Conexao.fechar(conn);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean excluir(IDominio obj) {
-		// TODO Auto-generated method stub
+		Produto_Categoria produto_categoria = (Produto_Categoria) obj;
+
+		Connection conn = null;
+		String sql = "DELETE FROM \"BD_CATEGORIAS\" WHERE id = ?;";
+
+			
+		try {
+			conn = Conexao.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, produto_categoria.getId());
+			
+			pstm.execute();
+
+			return true;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			Conexao.fechar(conn);
+		}
 		return false;
 	}
 
@@ -36,7 +76,7 @@ public class Produto_CategoriaDAO implements IDAO {
 
 		Connection conn = null;
 
-		String sql = "SELECT * FROM \"BD_CATEGORIAS\" ORDER BY descricao;";
+		String sql = "SELECT * FROM \"BD_CATEGORIAS\" ORDER BY id;";
 
 		try {
 			conn = Conexao.getConnection();

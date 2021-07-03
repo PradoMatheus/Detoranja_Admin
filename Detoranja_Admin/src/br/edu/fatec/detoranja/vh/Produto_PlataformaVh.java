@@ -7,7 +7,8 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+
+import com.google.gson.Gson;
 
 import br.edu.fatec.detoranja.dominio.IDominio;
 import br.edu.fatec.detoranja.dominio.Produto_Plataforma;
@@ -23,14 +24,9 @@ public class Produto_PlataformaVh implements IViewHelper {
 		
 		if (operacao != null && operacao.equals("Salvar")) {
 			
-			try {
-				Part filePart = req.getPart("txtUploadImage");
-				String fileName = filePart.getSubmittedFileName();
-				System.out.println(fileName);
-			} catch (IOException | ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			produto_plataforma.setDescricao(req.getParameter("txtDescricao"));
+			produto_plataforma.setId(Integer.parseInt(req.getParameter("txtId").toString()));
+			produto_plataforma.setImagem(null);
 
 		} else if (operacao != null && operacao.equals("Excluir")) {
 			
@@ -46,6 +42,17 @@ public class Produto_PlataformaVh implements IViewHelper {
 		String operacao = req.getParameter("operacao");
 		
 		if (operacao != null && operacao.equals("Salvar")) {
+			
+			String json = new Gson().toJson("success");
+
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("UTF-8");
+
+			try {
+				resp.getWriter().write(json);
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+			}
 
 		} else if (operacao != null && operacao.equals("Excluir")) {
 

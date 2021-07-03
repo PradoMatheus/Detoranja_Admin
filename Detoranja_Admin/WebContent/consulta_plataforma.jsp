@@ -39,7 +39,7 @@
 		  </div>
 		  <div class="form-group col-md-9" style="align-items: center">
 	  		<div class="input-group">
-				<input type="text" class="form-control filtroDesenvolvedor" aria-describedby="pesquisar" placeholder="Pesquisar" id="txtPesquisa" name="txtPesquisa">
+				<input type="text" class="form-control filtroPlataforma" aria-describedby="pesquisar" placeholder="Pesquisar" id="txtPesquisa" name="txtPesquisa">
 				<div class="input-group-prepend">
 					<span class="input-group-text" id="txtPesquisa"><img src="./icons/search.svg" height="20px"></span>
 				</div>
@@ -91,7 +91,7 @@
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<form action="produto_plataforma" method="post" enctype="application/x-www-form-urlencoded">
+				<!-- <form action="produto_plataforma" method="post" enctype="application/x-www-form-urlencoded">  -->
 					<div class="modal-header">
 						<h5 class="modal-title" id="labelPlataforma">Nova Plataforma</h5>
 					</div>
@@ -117,7 +117,7 @@
 						<button type="submit" class="btn btn-danger excluir_plataforma" name="operacao" value="Excluir" id="btnExcluir">Excluir</button>
 						<button type="submit" class="btn btn-primary salvar_plataforma" name="operacao" value="Salvar" id="btnSalvar">Salvar</button>
 					</div>
-				</form>
+				<!-- </form> -->
 			</div>
 		</div>
 	</div>
@@ -133,7 +133,7 @@
 					$(".editarPlataforma").click(function() {
 						$('#labelPlataforma').html('Editar Plataforma')
 						$("#btnExcluir").attr("disabled", false);
-						$("#txtPlataforma").val($("#desenvolvedor_" + $(this).val()).text());
+						$("#txtPlataforma").val($("#plataforma_" + $(this).val()).text());
 						$("#txtId").val($(this).val())
 						$("#btnSalvar").html('Atualizar')
 						$('#modalPlataforma').modal('show')
@@ -176,8 +176,14 @@
 							reader.readAsDataURL(file);
 						}
 					}
-					//Função chamada quando é digitado alguma letra no campo de pesquisa
-					$(".filtroDesenvolvedor").keyup(function(){
+					// Função para Salvar a plataforma
+					$(".salvar_plataforma").click(function(){
+						$.post("produto_plataforma?operacao=Salvar&txtDescricao=" + $("#txtPlataforma").val() + "&txtId=" + $("#txtId").val(), function(data){
+							document.location.reload(true);
+						});
+					});
+					// Função chamada quando é digitado alguma letra no campo de pesquisa
+					$(".filtroPlataforma").keyup(function(){
 						// Busca o valor digitado pelo usuario no input
 						var filtro_digitado = $(this).val().toUpperCase();
 						

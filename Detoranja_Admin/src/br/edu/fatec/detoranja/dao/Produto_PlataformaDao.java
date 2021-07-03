@@ -13,7 +13,30 @@ public class Produto_PlataformaDao implements IDAO {
 
 	@Override
 	public boolean salvar(IDominio obj) {
-		// TODO Auto-generated method stub
+		Produto_Plataforma produto_plataforma = (Produto_Plataforma) obj;
+
+		Connection conn = null;
+		String sql = null;
+		
+		if(produto_plataforma.getId() < 1)
+			sql = "INSERT INTO \"BD_PRODUTOS_PLATAFORMA\" (descricao, imagem) VALUES (?, ?);";
+		else
+			sql = "UPDATE \"BD_PRODUTOS_PLATAFORMA\" SET descricao = ?, imagem = ? WHERE id = " + produto_plataforma.getId() + ";";
+			
+		try {
+			conn = Conexao.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, produto_plataforma.getDescricao());
+			pstm.setString(2, produto_plataforma.getImagem());
+			
+			pstm.execute();
+
+			return true;
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			Conexao.fechar(conn);
+		}
 		return false;
 	}
 

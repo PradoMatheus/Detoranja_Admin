@@ -56,7 +56,30 @@ public class ProdutoDAO implements IDAO {
 
 	@Override
 	public IDominio buscar(IDominio obj) {
-		// TODO Auto-generated method stub
+		Produto produto = (Produto) obj;
+
+		Connection conn = null;
+
+		String sql = "SELECT * FROM \"BD_PRODUTOS\" WHERE id = " + produto.getId() + ";";
+
+		try {
+			conn = Conexao.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			ResultSet rs = pstm.executeQuery();
+
+			while (rs.next()) {
+				produto = new Produto();
+
+				produto.setId(rs.getInt("id"));
+				produto.setNome(rs.getString("titulo"));
+
+				return produto;
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} finally {
+			Conexao.fechar(conn);
+		}
 		return null;
 	}
 
@@ -76,7 +99,7 @@ public class ProdutoDAO implements IDAO {
 			List<IDominio> listaProdutos = new ArrayList<IDominio>();
 			while (rs.next()) {
 				produto = new Produto();
-				
+
 				produto.setId(rs.getInt("id"));
 				produto.setNome(rs.getString("nome"));
 				produto.setDescricao(rs.getString("descricao"));
@@ -87,14 +110,14 @@ public class ProdutoDAO implements IDAO {
 				produto.setData_lancamento(rs.getObject("data_lancamento", LocalDate.class));
 				produto.setPlataforma(rs.getString("Plataforma"));
 				produto.setValor(rs.getDouble("valor"));
-				
+
 				listaProdutos.add(produto);
 			}
-			
+
 			return listaProdutos;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-		} finally{
+		} finally {
 			Conexao.fechar(conn);
 		}
 		return null;

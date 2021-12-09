@@ -1,95 +1,95 @@
-<nav class="navbar navbar-dark bg-secondary fixed-top navbar-expand-lg">
-
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 	<%
 		// VALIDA SE O USUARIO ESTÁ LOGADO, CASO NÃO ESTEJA É DIRECIONA A TELA DE LOGIN
 		if (session.getAttribute("AdminUser") == null)
 			response.sendRedirect("index.jsp");
 	%>
-
-	<a class="navbar-brand" href="principal.jsp">
-		<img src="./complements/logo_site.png" width="30" height="30" alt="">
-		Detoranja
-	</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#conteudoNavbarSuportado"
-		aria-controls="conteudoNavbarSuportado" aria-expanded="false"
-		aria-label="Alterna navegação">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<div class="collapse navbar-collapse d-flex justify-content-end"
-		id="conteudoNavbarSuportado">
-		<ul class="navbar-nav">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"	> 
-					<img src="./icons/game-controller.svg" alt="..." style="width: 25px; color: white;">
-					Cadastros
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="./produto?operacao=Lista">Produtos</a> 
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="./produto_desenvolvedor?operacao=Lista&tipo=object">Desenvolvedores</a>
-					<a class="dropdown-item" href="./produto_distribuidor?operacao=Lista&tipo=object">Distribuidoras</a>
-					<a class="dropdown-item" href="./produto_categoria?operacao=Lista&tipo=object">Categorias</a>
-					<a class="dropdown-item" href="./produto_plataforma?operacao=Lista&tipo=object">Plataformas</a>
-				</div>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">
-					<img src="./icons/briefcase.svg" alt="..." style="width: 25px; color: white;">
-					Pedidos
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">
-					<img src="./icons/swap-horizontal.svg" alt="..." style="width: 25px; color: white;">
-					Trocas
-				</a>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"	> 
-					<img src="./icons/document.svg" alt="..." style="width: 25px; color: white;">
-					Relatorios
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#">Vendas</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Trocas</a>
-				</div>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">
-					<img src="./icons/settings.svg" alt="..." style="width: 25px; color: white;">
-					Minha Conta
-				</a>
-			</li>
-			<li class="nav-item">
-        		<!-- Botão para acionar modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalSair">
-				  Sair
-				</button>
-				
-				<!-- Modal -->
-				<div class="modal fade" id="modalSair" role="dialog"  aria-hidden="true">
-				  <div class="modal-dialog modal-dialog-centered" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" >Logout</h5>
-				      </div>
-				      <div class="modal-body">
-				        Deseja realmente sair do Administrador Detoranja ?
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-				        <button type="button" class="btn btn-primary">sair</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-      		</li>
-		</ul>
-	</div>
-	
-</nav>
-
-<br><br>
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="principal.jsp">Detoranja</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Pesquisar" aria-label="Pesquisar" aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Configurações</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="./administrador?operacao=Sair">Sair</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+	        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Produtos</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProduto" aria-expanded="false" aria-controls="collapseProduto">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                Livros
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseProduto" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="#">Cadastro</a>
+                                    <a class="nav-link" href="#">Autor</a>
+                                    <a class="nav-link" href="#">Categoria</a>
+                                    <a class="nav-link" href="#">Editora</a>
+                                    <a class="nav-link" href="#">Idioma</a>
+                                    <a class="nav-link" href="#">Precificação</a>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">ESTOQUE</div>
+                            <a class="nav-link" href="./compra?operacao=Lista">
+                                <div class="sb-nav-link-icon"><i class="fas fa-dolly-flatbed"></i></div>
+                                Compras
+                            </a>
+                            <a class="nav-link" href="./movimentacao?operacao=Lista">
+                                <div class="sb-nav-link-icon"><i class="fas fa-compress-alt"></i></div>
+                                Movimentações
+                            </a>
+                            <div class="sb-sidenav-menu-heading">CLIENTE</div>
+                            <a class="nav-link" href="./cliente?operacao=Lista">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
+                                Consulta
+                            </a>
+                            <div class="sb-sidenav-menu-heading">FORNECEDOR</div>
+                            <a class="nav-link" href="./fornecedor?operacao=Lista">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
+                                Cadastro
+                            </a>
+                            <div class="sb-sidenav-menu-heading">VENDAS</div>
+                            <a class="nav-link" href="./pedido?operacao=Lista&id=0">
+                                <div class="sb-nav-link-icon"><i class="fas fa-briefcase"></i></div>
+                                Pedidos <span class="badge badge-primary" style="background-color: blue; margin-left: 5px">0</span>
+                            </a>
+                            <a class="nav-link" href="./troca_admin?operacao=Lista&id=1">
+                                <div class="sb-nav-link-icon"><i class="fas fa-exchange-alt"></i></div>
+                                Troca <span class="badge badge-primary" style="background-color: blue; margin-left: 5px">0</span>
+                            </a>
+                            <a class="nav-link" href="./cupom_admin?operacao=Lista">
+                                <div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>
+                                Cupons
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Relatorios</div>
+                            <a class="nav-link" href="consulta_relatorios.jsp">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clipboard"></i></div>
+                                Livros Vendidos
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Usuario Logado:</div>
+                       Matheus Prado de Melo
+                    </div>
+                </nav>
+            </div>

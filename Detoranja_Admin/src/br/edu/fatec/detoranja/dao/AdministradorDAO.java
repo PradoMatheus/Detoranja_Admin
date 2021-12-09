@@ -29,6 +29,7 @@ public class AdministradorDAO implements IDAO{
 
 		try {
 			String sql = "SELECT * FROM \"BD_ADMINISTRADOR\" WHERE senha = '" + admin.getSenha()  + "' AND email = '" + admin.getEmail()  + "';";
+			System.out.println(sql);
 			conn = Conexao.getConnection();
 			PreparedStatement pstm = conn.prepareStatement(sql);
 			ResultSet rs = pstm.executeQuery();

@@ -1,20 +1,19 @@
-<html>
-	<head>
-		<title>Administrador Detoranja</title>
-		<meta charset="UTF-8">
-		
-		<!-- CSS -->
-		<link rel="stylesheet" href="./Bootstrap/css/bootstrap.min.css">
-		<link rel="icon" href="./complements/logo_browser.png">
-	
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Detoranja Admin</title>
+<%@ include file="complements/complements_css.jsp"%>
+</head>
+<body class="sb-nav-fixed">
 	<%@ include file="complements/navbar.jsp"%>
-	<body>
-	</body>
-	<footer>
-		<!-- JS -->
-			<script src="./Bootstrap/js/jquery-3.3.1.slim.min.js"></script>
-			<script src="./Bootstrap/js/popper.min.js"></script>
-			<script src="./Bootstrap/js/bootstrap.min.js"></script>
-	</footer>
+	<div id="layoutSidenav_content"></div>
+	</div>
+	<%@ include file="complements/complements_js.jsp"%>
+</body>
 </html>

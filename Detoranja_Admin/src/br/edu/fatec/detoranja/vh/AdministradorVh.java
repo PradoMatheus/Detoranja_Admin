@@ -26,6 +26,8 @@ public class AdministradorVh implements IViewHelper {
 			adm.setSenha(Criptografia_Hash.criptografiaHash(req.getParameter("txtpassword")));
 			adm.setEmail(req.getParameter("txtemail"));
 
+		} else if (operacao != null && operacao.equals("Sair")) {
+
 		}
 
 		return adm;
@@ -46,6 +48,15 @@ public class AdministradorVh implements IViewHelper {
 				} else {
 					req.getRequestDispatcher("index.jsp").forward(req, resp);
 				}
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if (operacao != null && operacao.equals("Sair")) {
+			try {
+				req.getSession().removeAttribute("AdminUser");
+				req.getRequestDispatcher("index.jsp").forward(req, resp);
 			} catch (ServletException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

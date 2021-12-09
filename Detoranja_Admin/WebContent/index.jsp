@@ -6,6 +6,12 @@
 		<link rel="icon" href="./complements/logo_browser.png">
 	</head>
 	<body>
+		
+		<%
+		// VALIDA SE O USUARIO ESTÁ LOGADO, CASO NÃO ESTEJA É DIRECIONA A TELA DE LOGIN
+		if (session.getAttribute("AdminUser") != null)
+			response.sendRedirect("principal.jsp");
+		%>
 		<main>
 			<form id="form_login" action="administrador" method="POST">
 				<div style="padding: 5rem"></div>

@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import br.edu.fatec.detoranja.dominio.IDominio;
 import br.edu.fatec.detoranja.dominio.Produto;
 import br.edu.fatec.detoranja.util.Resultado;
@@ -35,9 +37,10 @@ public class ProdutoVh implements IViewHelper {
 			produto.setValor(Double.parseDouble(req.getParameter("txtValor").replace(",", ".")));
 			produto.setPlataforma(req.getParameter("txtPlataforma"));
 			produto.setDescricao(req.getParameter("txtDescricao"));
-		}
-		if (operacao != null && operacao.equals("Lista")) {
+		} else if (operacao != null && operacao.equals("Lista")) {
 
+		} else if (operacao != null && operacao.equals("Buscar")) {
+			produto.setId(Integer.parseInt(req.getParameter("id")));
 		}
 
 		return produto;
@@ -62,13 +65,24 @@ public class ProdutoVh implements IViewHelper {
 				listaProduto.add((Produto) d);
 			}
 			req.setAttribute("listaProduto", listaProduto);
-			
+
 			try {
 				req.getRequestDispatcher("consulta_produtos.jsp").forward(req, resp);
 			} catch (ServletException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+		} else if (operacao != null && operacao.equals("Buscar")) {
+			String json = new Gson().toJson(resultado.getDominio());
+
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("UTF-8");
+
+			try {
+				resp.getWriter().write(json);
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
 			}
 		}
 	}
